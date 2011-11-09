@@ -5,10 +5,15 @@ Atenção
 TODO
 ========================
 > @todo Refatorar metodos e propriedades, nomes confusos
+
 > @todo Mover a classe Correios_Ect_ECT para Correios_Ect
+
 > @todo Refatorar método Correios_Ect::prdt para Correios_Ect::precosEPrazos
+
 > @todo Mover a classe Correios_Ect_Prdt_Prdt para Correios_Ect_PrecosEPrazos
+
 > @todo Aplicar Fluente Interface em Correios_Ect_PrecosEPrazos
+
 
 Cálculo de Preço e Prazo
 ========================
