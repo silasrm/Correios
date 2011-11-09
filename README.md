@@ -1,6 +1,6 @@
 Atenção
 ========================
-* Reescrita e reorganização além de implementação do código do projeto Correios do iMastersDev encontrado aqui https://github.com/iMastersDev/correios
+* Reescrita, reorganização e implementação de funcionalidades no código do projeto Correios do iMastersDev encontrado aqui https://github.com/iMastersDev/correios
 
 TODO
 ========================
