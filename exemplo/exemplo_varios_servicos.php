@@ -21,5 +21,5 @@ $precosEPrazos = $ect->getPrecosEPrazos()
                         ->setNVlPeso( 10 );
 
 foreach ( $precosEPrazos->call() as $servico ) {
-    printf( "O preço do frete do correios para o serviço %s é R$ %.02f<br />" , $precosEPrazos->getServicos()->getNome($servico->Codigo) , $servico->Valor );
+    printf( "O preço do frete do correios para o serviço %s é R$ %.02f<br />" , $servico->tipo , $servico->valor );
 }

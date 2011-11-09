@@ -19,63 +19,70 @@ class Correios_Ect_PrecosEPrazos_Servico
 	 * @access public
 	 * @var integer
 	 */
-	public $Codigo;
+	public $codigo;
 
 	/**
 	 * Valor do serviço adicional de mão própria
 	 * @access public
 	 * @var float
 	 */
-	public $ValorMaoPropria;
+	public $valorMaoPropria;
 
 	/**
 	 * Valor do serviço adicional de aviso de recebimento
 	 * @access public
 	 * @var float
 	 */
-	public $ValorAvisoRecebimento;
+	public $valorAvisoRecebimento;
 
 	/**
 	 * Valor do serviço adicional de valor declarado
 	 * @access public
 	 * @var float
 	 */
-	public $ValorValorDeclarado;
+	public $valorValorDeclarado;
 
 	/**
 	 * Prazo de entrega para a encomenda
 	 * @access public
 	 * @var integer
 	 */
-	public $PrazoEntrega;
+	public $prazoEntrega;
 
 	/**
 	 * Informa se a localização possui entrega domiciliar
 	 * @access public
 	 * @var boolean
 	 */
-	public $EntregaDomiciliar;
+	public $entregaDomiciliar;
 
 	/**
 	 * Informa se existe entrega aos sábados
 	 * @access public
 	 * @var boolean
 	 */
-	public $EntregaSabado;
+	public $entregaSabado;
+
+	/**
+	 * Guarda o nome do tipo 
+	 * @access public
+	 * @var boolean
+	 */
+	public $tipo;
 
 	/**
 	 * Código do erro para o serviço, se não tiver ocorrido nenhum erro esse valor será 0
 	 * @access public
 	 * @var integer
 	 */
-	public $Erro = 0;
+	public $erro = 0;
 
 	/**
 	 * Mensagem de erro para o serviço, se não tiver ocorrido nenhum erro esse valor será NULL
 	 * @access public
 	 * @var string
 	 */
-	public $MsgErro;
+	public $msgErro;
 
 	/**
 	 * Lista de tipos de servicos

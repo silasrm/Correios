@@ -142,21 +142,24 @@ class Correios_Ect_PrecosEPrazos extends Correios_Ect_Abstract {
 				$value	= $node->nodeValue;
 
 				switch ( $name ){
-					case 'Codigo':
-					case 'Erro':
-					case 'PrazoEntrega':
+					case 'codigo':
+					case 'erro':
+					case 'prazoEntrega':
 						 $value = (int) $value;
 						 break;
-					case 'Valor':
-					case 'ValorMaoPropria':
-					case 'ValorAvisoRecebimento':
-					case 'ValorValorDeclarado':
+					case 'valor':
+					case 'valorMaoPropria':
+					case 'valorAvisoRecebimento':
+					case 'valorValorDeclarado':
 						$value = (float) str_replace( ',' , '.' , $value ); break;
 						break;
 				}
-
-				$ectServico->$name = $value;
+				
+				$propName = lcfirst($name);
+				$ectServico->$propName = $value;
 			}
+			
+			$ectServico->tipo = $this->getServicos()->getNome($ectServico->codigo);
 
 			$servicos->append( $ectServico );
 		}
