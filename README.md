@@ -4,15 +4,15 @@ Atenção
 
 TODO
 ========================
-> @todo Refatorar metodos e propriedades, nomes confusos
+> @todo Refatorar metodos e propriedades, nomes confusos OK
 
-> @todo Mover a classe Correios_Ect_ECT para Correios_Ect
+> @todo Mover a classe Correios_Ect_ECT para Correios_Ect OK
 
-> @todo Refatorar método Correios_Ect::prdt para Correios_Ect::precosEPrazos
+> @todo Refatorar método Correios_Ect::prdt para Correios_Ect::getPrecosEPrazos OK
 
-> @todo Mover a classe Correios_Ect_Prdt_Prdt para Correios_Ect_PrecosEPrazos
+> @todo Mover as classes Correios_Ect_Prdt* para Correios_Ect_PrecosEPrazos* OK
 
-> @todo Aplicar Fluente Interface em Correios_Ect_PrecosEPrazos
+> @todo Aplicar Fluente Interface em Correios_Ect_PrecosEPrazos OK
 
 
 Cálculo de Preço e Prazo
@@ -31,40 +31,40 @@ Como Usar ?
 	<?php
 	// Adicione a pasta onde encontra-se o projeto no include_path
 	
-	$ect = new Correios_Ect_ECT();
-	$prdt = $ect->prdt();
-	$prdt->setNVlAltura( 10 );
-	$prdt->setNVlComprimento( 20 );
-	$prdt->setNVlLargura( 20 );
-	$prdt->setNCdFormato( Correios_Ect_Prdt_ECTFormatos::FORMATO_CAIXA_PACOTE );
-	$prdt->setNCdServico( Correios_Ect_Prdt_ECTServicos::PAC );
-	$prdt->setSCepOrigem( '09641030' );
-	$prdt->setSCepDestino( '27511300' );
-	$prdt->setNVlPeso( 10 );
+	$ect = new Correios_Ect();
+	$precosEPrazos = $ect->getPrecosEPrazos()
+							->setNVlAltura( 10 )
+							->setNVlComprimento( 20 )
+							->setNVlLargura( 20 )
+							->setNCdFormato( Correios_Ect_PrecosEPrazos_Formatos::FORMATO_CAIXA_PACOTE )
+							->setNCdServico( Correios_Ect_PrecosEPrazos_Servicos::PAC )
+							->setSCepOrigem( '09641030' )
+							->setSCepDestino( '27511300' )
+							->setNVlPeso( 10 );
 
-	foreach ( $prdt->call() as $servico ) {
-		printf( "O preço do frete do correios para o serviço %s é R$ %.02f<br />" , $prdt->getServicos()->getNome($servico->Codigo) , $servico->Valor );
+	foreach ( $precosEPrazos->call() as $servico ) {
+		printf( "O preço do frete do correios para o serviço %s é R$ %.02f<br />" , $precosEPrazos->getServicos()->getNome($servico->Codigo) , $servico->Valor );
 	}
 
 > Ou de vários ao mesmo tempo, eliminando-se assim o tempo de espera do cliente:
 	
 	<?php
 	// Adicione a pasta onde encontra-se o projeto no include_path
-	
-	$ect = new Correios_Ect_ECT();
-	$prdt = $ect->prdt();
-	$prdt->setNVlAltura( 10 );
-	$prdt->setNVlComprimento( 20 );
-	$prdt->setNVlLargura( 20 );
-	$prdt->setNCdFormato( Correios_Ect_Prdt_ECTFormatos::FORMATO_CAIXA_PACOTE );
-	$prdt->setNCdServico( array(
-        Correios_Ect_Prdt_ECTServicos::PAC,
-        Correios_Ect_Prdt_ECTServicos::SEDEX
-    ) ); //calculando apenas PAC e SEDEX
-	$prdt->setSCepOrigem( '09641030' );
-	$prdt->setSCepDestino( '27511300' );
-	$prdt->setNVlPeso( 10 );
 
-	foreach ( $prdt->call() as $servico ) {
-		printf( "O preço do frete do correios para o serviço %s é R$ %.02f<br />" , $prdt->getServicos()->getNome($servico->Codigo) , $servico->Valor );
-	}
+	$ect = new Correios_Ect();
+    $precosEPrazos = $ect->getPrecosEPrazos()
+                            ->setNVlAltura( 10 )
+                            ->setNVlComprimento( 20 )
+                            ->setNVlLargura( 20 )
+                            ->setNCdFormato( Correios_Ect_PrecosEPrazos_Formatos::FORMATO_CAIXA_PACOTE )
+                            ->setNCdServico( array(
+                                Correios_Ect_PrecosEPrazos_Servicos::PAC,
+                                Correios_Ect_PrecosEPrazos_Servicos::SEDEX
+                            ) ) //calculando apenas PAC e SEDEX
+                            ->setSCepOrigem( '09641030' )
+                            ->setSCepDestino( '27511300' )
+                            ->setNVlPeso( 10 );
+
+    foreach ( $precosEPrazos->call() as $servico ) {
+        printf( "O preço do frete do correios para o serviço %s é R$ %.02f<br />" , $precosEPrazos->getServicos()->getNome($servico->Codigo) , $servico->Valor );
+    }

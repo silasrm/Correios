@@ -11,24 +11,28 @@ require_once 'Correios/Http/HTTPCookieManager.php';
 
 /**
  * @brief	Interface para definição de uma API do Correios
+ * @author	Silas Ribas <silasrm@gmail.com>
  * @author	João Batista Neto <neto.joaobatista@imasters.com.br>
  */
-abstract class Correios_Ect_EctAPI {
+abstract class Correios_Ect_Abstract
+{
 	/**
-	 * @var	ECT
+	 * @access protected
+	 * @var	Correios_Ect
 	 */
 	protected $ect;
 
 	/**
-	 * @var	HTTPConnection
+	 * @var	Correios_Http_HTTPConnection
 	 */
 	protected $httpConnection;
 
 	/**
 	 * @brief	Constroi o objeto que representa uma API do Correios
-	 * @param	ECT $ect
+	 * @param	Correios_Ect $ect
 	 */
-	public function __construct( Correios_Ect_ECT $ect ) {
+	public function __construct( Correios_Ect $ect )
+	{
 		$this->ect = $ect;
 		$this->httpConnection = $ect->getHTTPConnection();
 		$this->httpConnection->initialize( $this->getTargetHost() );

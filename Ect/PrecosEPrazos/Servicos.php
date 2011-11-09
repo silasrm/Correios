@@ -4,14 +4,16 @@
  * @details	Classes e interfaces para integração com a API do Correios
  * @package Correios
  * @subpackage Correios_Ect
- * @subpackage Correios_Ect_Prdt
+ * @subpackage Correios_Ect_PrecosEPrazos
  */
 
 /**
  * @brief	Tipos de serviços oferecidos pelo Correios
+ * @author	Silas Ribas <silasrm@gmail.com>
  * @author	João Batista Neto <neto.joaobatista@imasters.com.br>
  */
-interface Correios_Ect_Prdt_ECTServicos {
+interface Correios_Ect_PrecosEPrazos_Servicos
+{
 	/**
 	 * e-SEDEX, com contrato
 	 */

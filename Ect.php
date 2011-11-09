@@ -8,14 +8,17 @@
 
 require_once 'Correios/Http/HTTPConnection.php';
 require_once 'Correios/Http/HTTPCookieManager.php';
-require_once 'Correios/Ect/Prdt/Prdt.php';
+require_once 'Correios/Ect/PrecosEPrazos.php';
 
 /**
  * @brief	Interface para APIs dos Correios (ECT)
+ * @author	Silas Ribas <silasrm@gmail.com>
  * @author	João Batista Neto <neto.joaobatista@imasters.com.br>
  */
-class Correios_Ect_ECT {
+class Correios_Ect
+{
 	/**
+	 * @access private
 	 * @var	Correios_Http_HTTPConnection
 	 */
 	private $httpConnection;
@@ -35,9 +38,9 @@ class Correios_Ect_ECT {
 
 	/**
 	 * @brief	Objeto de integração para consultas de preços e prazos
-	 * @return	Correios_Ect_Prdt_Prdt
+	 * @return	Correios_Ect_PrecosEPrazos
 	 */
-	public function prdt() {
-		return new Correios_Ect_Prdt_Prdt( $this );
+	public function getPrecosEPrazos() {
+		return new Correios_Ect_PrecosEPrazos( $this );
 	}
 }

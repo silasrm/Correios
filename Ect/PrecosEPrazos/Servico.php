@@ -4,70 +4,83 @@
  * @details	Classes e interfaces para integração com a API do Correios
  * @package Correios
  * @subpackage Correios_Ect
- * @subpackage Correios_Ect_Prdt
+ * @subpackage Correios_Ect_PrecosEPrazos
  */
 
 /**
  * @brief	Informações sobre preço e prazo cobrados para um serviço do Correios
+ * @author	Silas Ribas <silasrm@gmail.com>
  * @author	João Batista Neto <neto.joaobatista@imasters.com.br>
  */
-class Correios_Ect_Prdt_ECTServico {
+class Correios_Ect_PrecosEPrazos_Servico
+{
 	/**
 	 * Código do serviço
+	 * @access public
 	 * @var integer
 	 */
 	public $Codigo;
 
 	/**
 	 * Valor do serviço adicional de mão própria
+	 * @access public
 	 * @var float
 	 */
 	public $ValorMaoPropria;
 
 	/**
 	 * Valor do serviço adicional de aviso de recebimento
+	 * @access public
 	 * @var float
 	 */
 	public $ValorAvisoRecebimento;
 
 	/**
 	 * Valor do serviço adicional de valor declarado
+	 * @access public
 	 * @var float
 	 */
 	public $ValorValorDeclarado;
 
 	/**
 	 * Prazo de entrega para a encomenda
+	 * @access public
 	 * @var integer
 	 */
 	public $PrazoEntrega;
 
 	/**
 	 * Informa se a localização possui entrega domiciliar
+	 * @access public
 	 * @var boolean
 	 */
 	public $EntregaDomiciliar;
 
 	/**
 	 * Informa se existe entrega aos sábados
+	 * @access public
 	 * @var boolean
 	 */
 	public $EntregaSabado;
 
 	/**
 	 * Código do erro para o serviço, se não tiver ocorrido nenhum erro esse valor será 0
+	 * @access public
 	 * @var integer
 	 */
 	public $Erro = 0;
 
 	/**
 	 * Mensagem de erro para o serviço, se não tiver ocorrido nenhum erro esse valor será NULL
+	 * @access public
 	 * @var string
 	 */
 	public $MsgErro;
 
 	/**
 	 * Lista de tipos de servicos
+	 * @access protected
+	 * @var array
 	 */
 	protected $_tipos	= array(
 		'E_SEDEX' => 'E-Sedex',
@@ -85,7 +98,9 @@ class Correios_Ect_Prdt_ECTServico {
 	  	);
 
   	/**
-	 * Lista de constantes da interface Correios_Ect_Prdt_ECTServicos
+	 * Lista de constantes da interface Correios_Ect_PrecosEPrazos_ECTServicos
+	 * @access protected
+	 * @var array
 	 */
 	protected $_constants = array();
 
@@ -118,7 +133,7 @@ class Correios_Ect_Prdt_ECTServico {
   	protected function _getConstants()
 	{
 		if (count($this->_constants) == 0) {
-			$reflection = new ReflectionClass('Correios_Ect_Prdt_ECTServicos');
+			$reflection = new ReflectionClass('Correios_Ect_PrecosEPrazos_Servicos');
 			$this->_constants = $reflection->getConstants();
 		}
 

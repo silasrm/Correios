@@ -1,22 +1,22 @@
 <?php
 
 set_include_path( implode( PATH_SEPARATOR
-                            , array( realpath('.' . '/../../library' )
+                            , array( realpath('.' . '/../../' )
                                     , get_include_path() ) ) );
 
-require_once 'Ect/ECT.php';
+require_once 'Correios/Ect.php';
 
-$ect = new Correios_Ect_ECT();
-$prdt = $ect->prdt();
-$prdt->setNVlAltura( 10 );
-$prdt->setNVlComprimento( 20 );
-$prdt->setNVlLargura( 20 );
-$prdt->setNCdFormato( Correios_Ect_Prdt_ECTFormatos::FORMATO_CAIXA_PACOTE );
-$prdt->setNCdServico( Correios_Ect_Prdt_ECTServicos::PAC );
-$prdt->setSCepOrigem( '09641030' );
-$prdt->setSCepDestino( '27511300' );
-$prdt->setNVlPeso( 10 );
+$ect = new Correios_Ect();
+$precosEPrazos = $ect->getPrecosEPrazos()
+						->setNVlAltura( 10 )
+						->setNVlComprimento( 20 )
+						->setNVlLargura( 20 )
+						->setNCdFormato( Correios_Ect_PrecosEPrazos_Formatos::FORMATO_CAIXA_PACOTE )
+						->setNCdServico( Correios_Ect_PrecosEPrazos_Servicos::PAC )
+						->setSCepOrigem( '09641030' )
+						->setSCepDestino( '27511300' )
+						->setNVlPeso( 10 );
 
-foreach ( $prdt->call() as $servico ) {
-	printf( "O preço do frete do correios para o serviço %s é R$ %.02f<br />" , $prdt->getServicos()->getNome($servico->Codigo) , $servico->Valor );
+foreach ( $precosEPrazos->call() as $servico ) {
+	printf( "O preço do frete do correios para o serviço %s é R$ %.02f<br />" , $precosEPrazos->getServicos()->getNome($servico->Codigo) , $servico->Valor );
 }
