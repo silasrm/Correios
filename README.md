@@ -1,5 +1,7 @@
+Atenção
 ========================
 * Reescrita e reorganização além de implementação do código do projeto Correios do iMastersDev encontrado aqui https://github.com/iMastersDev/correios
+
 
 Cálculo de Preço e Prazo
 ========================
@@ -15,39 +17,42 @@ Como Usar ?
 > A biblioteca pode fazer o cálculo de 1 serviço:
 
 	<?php
-	require_once 'com/imasters/php/ect/ECT.php';
+	// Adicione a pasta onde encontra-se o projeto no include_path
 	
-	$ect = new ECT();
+	$ect = new Correios_Ect_ECT();
 	$prdt = $ect->prdt();
 	$prdt->setNVlAltura( 10 );
 	$prdt->setNVlComprimento( 20 );
 	$prdt->setNVlLargura( 20 );
-	$prdt->setNCdFormato( ECTFormatos::FORMATO_CAIXA_PACOTE );
-	$prdt->setNCdServico( ECTServicos::PAC ); //calculando apenas PAC
+	$prdt->setNCdFormato( Correios_Ect_Prdt_ECTFormatos::FORMATO_CAIXA_PACOTE );
+	$prdt->setNCdServico( Correios_Ect_Prdt_ECTServicos::PAC );
 	$prdt->setSCepOrigem( '09641030' );
 	$prdt->setSCepDestino( '27511300' );
 	$prdt->setNVlPeso( 10 );
-	
+
 	foreach ( $prdt->call() as $servico ) {
-		printf( "O preço do frete do correios para o serviço %d é R$ %.02f\n" , $servico->Codigo , $servico->Valor );
+		printf( "O preço do frete do correios para o serviço %s é R$ %.02f<br />" , $prdt->getServicos()->getNome($servico->Codigo) , $servico->Valor );
 	}
 
 > Ou de vários ao mesmo tempo, eliminando-se assim o tempo de espera do cliente:
 	
 	<?php
-	require_once 'com/imasters/php/ect/ECT.php';
+	// Adicione a pasta onde encontra-se o projeto no include_path
 	
-	$ect = new ECT();
+	$ect = new Correios_Ect_ECT();
 	$prdt = $ect->prdt();
 	$prdt->setNVlAltura( 10 );
 	$prdt->setNVlComprimento( 20 );
 	$prdt->setNVlLargura( 20 );
-	$prdt->setNCdFormato( ECTFormatos::FORMATO_CAIXA_PACOTE );
-	$prdt->setNCdServico( implode( ',' , array( ECTServicos::PAC , ECTServicos::SEDEX ) ) );
+	$prdt->setNCdFormato( Correios_Ect_Prdt_ECTFormatos::FORMATO_CAIXA_PACOTE );
+	$prdt->setNCdServico( array(
+        Correios_Ect_Prdt_ECTServicos::PAC,
+        Correios_Ect_Prdt_ECTServicos::SEDEX
+    ) ); //calculando apenas PAC e SEDEX
 	$prdt->setSCepOrigem( '09641030' );
 	$prdt->setSCepDestino( '27511300' );
 	$prdt->setNVlPeso( 10 );
-	
+
 	foreach ( $prdt->call() as $servico ) {
-		printf( "O preço do frete do correios para o serviço %d é R$ %.02f\n" , $servico->Codigo , $servico->Valor );
+		printf( "O preço do frete do correios para o serviço %s é R$ %.02f<br />" , $prdt->getServicos()->getNome($servico->Codigo) , $servico->Valor );
 	}
