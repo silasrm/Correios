@@ -64,7 +64,7 @@ class Correios_Ect_PrecosEPrazos_Servico
 	public $entregaSabado;
 
 	/**
-	 * Guarda o nome do tipo 
+	 * Guarda o nome do tipo
 	 * @access public
 	 * @var boolean
 	 */
@@ -113,7 +113,7 @@ class Correios_Ect_PrecosEPrazos_Servico
 
 	/**
 	 * Retorna o nome do serviço informado
-	 * 
+	 *
 	 * @param	string $tipo
 	 * @return string|InvalidArgumentException Nome do serviço ou InvalidArgumentException quando for um serviço inválido.
 	 */
@@ -129,15 +129,15 @@ class Correios_Ect_PrecosEPrazos_Servico
   			}
   		}
 
-  		throw new InvalidArgumentException('Tipo de serviço desconhecido.');
-  	}
+		throw new InvalidArgumentException('Tipo de serviço desconhecido.');
+	}
 
-  	/**
+	/**
 	 * Retorna a lista de constantes da interface de serviços
-	 * 
+	 *
 	 * @return array
 	 */
-  	protected function _getConstants()
+	protected function _getConstants()
 	{
 		if (count($this->_constants) == 0) {
 			$reflection = new ReflectionClass('Correios_Ect_PrecosEPrazos_Servicos');
@@ -145,5 +145,28 @@ class Correios_Ect_PrecosEPrazos_Servico
 		}
 
 		return $this->_constants;
+	}
+
+	/**
+	 * Retorna o tipo a partir do código
+	 *
+	 * @return array
+	 */
+	public function getTipoByCodigo($codigo)
+	{
+		$constantes = $this->_getConstants();
+
+		$retorno = array();
+		foreach($constantes as $key => $value)
+		{
+			if($value == $codigo)
+			{
+				$retorno['tipo'] = $key;
+				$retorno['codigo'] = $codigo;
+				$retorno['texto'] = $this->_tipos[$key];
+			}
+		}
+
+		return $retorno;
 	}
 }
